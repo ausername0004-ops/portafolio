@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <style>
     :root{
-      --ink:#12120f;--ink2:#20211c;--paper:#ebe9e0;--milk:#f4f2e8;--yellow:#e9ff54;--yellow2:#d6ed43;--gray:#9a9d97;--line:rgba(20,20,17,.18);
+      --ink:#12120f;--ink2:#20211c;--paper:#ebe9e0;--milk:#f4f2e8;--yellow:#f5ff0d;--yellow2:#dceb12;--gray:#9a9d97;--line:rgba(20,20,17,.18);
       --sans:'DM Sans','Inter Display','Arial',sans-serif;
       --display:'Barlow Condensed','Impact','Arial Narrow',sans-serif;
       --mono:'IBM Plex Mono','Liberation Mono',monospace;
@@ -42,30 +42,73 @@
     .nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:4px;height:1px;background:var(--yellow);transition:right .3s}
     .nav-links a:hover{color:var(--yellow)}.nav-links a:hover::after{right:0}
     .header-right{justify-self:end;display:flex;align-items:center;gap:11px;font-family:var(--mono);font-size:10px;letter-spacing:.055em}
-    .pulse{width:8px;height:8px;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 5px rgba(233,255,84,.10)}
+    .pulse{width:8px;height:8px;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 5px rgba(245,255,13,.10)}
     .menu-toggle{display:none;background:none;border:1px solid rgba(244,242,232,.35);color:var(--paper);width:42px;height:42px;align-items:center;justify-content:center;cursor:pointer}
     .menu-toggle svg{width:21px;stroke:currentColor}
     /* HERO: an art-directed magazine cover, not a stack of cards */
     .hero{position:relative;min-height:min(900px,calc(100svh - 78px));isolation:isolate;overflow:hidden;background:radial-gradient(ellipse 60% 60% at 68% 50%,#282d20 0,rgba(22,24,19,.66) 48%,transparent 72%),var(--ink);display:flex;flex-direction:column}
     .hero::before{content:"";z-index:-1;position:absolute;inset:0;opacity:.26;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:68px 68px;mask-image:linear-gradient(90deg,transparent,#000 34%,#000 85%,transparent)}
+    /* Notación matemática de fondo: fragmentos dispersos sobre la retícula, no contenido principal. */
+    .hero-ambient{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;user-select:none}
+    .math-glyph{position:absolute;color:rgba(221,237,179,.30);font-family:var(--serif);font-weight:400;line-height:1;white-space:nowrap;opacity:.7;text-shadow:0 0 14px rgba(179,215,86,.06);animation:ambient-float 17s ease-in-out infinite alternate}
+    .math-glyph:nth-child(3n){animation-duration:22s;animation-delay:-9s}
+    .math-glyph:nth-child(4n){animation-duration:26s;animation-delay:-13s}
+    .math-glyph.math-equation{font-family:var(--mono);font-size:clamp(10px,.91vw,14px);letter-spacing:-.065em;color:rgba(216,233,177,.35);opacity:.61}
+    .glyph-sum{left:48%;top:22%;font-size:44px;transform:rotate(-8deg)}
+    .glyph-integral{left:37%;top:52%;font-size:52px;transform:rotate(12deg);opacity:.68}
+    .glyph-pi{left:24%;top:15%;font-size:29px;opacity:.76}
+    .glyph-nabla{left:55%;top:66%;font-size:28px;opacity:.68}
+    .glyph-infinity{left:6%;top:57%;font-size:33px;opacity:.58}
+    .glyph-theta{left:77%;top:15%;font-size:26px;opacity:.76}
+    .glyph-delta{left:14%;top:64%;font-size:27px;opacity:.67}
+    .glyph-partial{left:59%;top:13%;font-size:30px;transform:rotate(9deg)}
+    .glyph-root{left:89%;top:21%;font-size:28px;opacity:.64}
+    .glyph-limit{left:9%;top:47%;font-size:12px;transform:rotate(-5deg)}
+    .glyph-primitive{left:50%;top:47%;font-size:14px;transform:rotate(3deg)}
+    .glyph-chain{left:29%;top:65%;font-size:11px;transform:rotate(-3deg)}
+    .glyph-derivative{left:42%;top:12%;font-size:12px;opacity:.72}
+    .glyph-power{left:86%;top:62%;font-size:13px;opacity:.54}
+    /* Cadenas y anotaciones como si fueran ecos de código en segundo plano. */
+    .code-annotation{position:absolute;font:400 9px/1.4 var(--mono);letter-spacing:.09em;color:rgba(217,240,154,.27);white-space:nowrap;opacity:.64;animation:ambient-float 19s ease-in-out infinite alternate}
+    .code-annotation-a{left:43%;top:39%;transform:rotate(-90deg);animation-delay:-8s}
+    .code-annotation-b{right:5%;bottom:20%;animation-delay:-5s}
+    .code-annotation-c{left:13%;top:22%;animation-delay:-11s}
+    .code-annotation-d{left:46%;bottom:16%;animation-delay:-14s}
+    .code-annotation-e{right:11%;top:10%;animation-delay:-4s}
+    .matrix-trace{position:absolute;inset:15% 1% 15% auto;display:flex;gap:18px;justify-content:flex-end;mask-image:linear-gradient(180deg,transparent,#000 22%,#000 76%,transparent);opacity:.30;transform:skewY(-5deg)}
+    .matrix-trace span{font:400 10px/1 var(--mono);letter-spacing:7px;color:#dbef7d;writing-mode:vertical-rl;white-space:nowrap;animation:trace-drift 17s ease-in-out infinite alternate}
+    .matrix-trace span:nth-child(2n){animation-delay:-7s;opacity:.55;transform:translateY(28px)}
+    .matrix-trace span:nth-child(3n){animation-delay:-11s;opacity:.72}
+    .matrix-trace--secondary{inset:27% auto 27% 42%;gap:12px;opacity:.12;transform:skewY(7deg)}
+    .matrix-trace--secondary span{font-size:9px;letter-spacing:8px}
+    @keyframes trace-drift{from{translate:0 -10px}to{translate:0 35px}}
+    @keyframes ambient-float{from{translate:0 0}to{translate:0 -10px}}
     .hero::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:4;opacity:.2;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E")}
     .hero-top{padding:31px var(--pad) 0;display:flex;align-items:center;justify-content:space-between;z-index:6;position:relative}
     .hero-top span:last-child{color:var(--gray)}
     .hero-body{flex:1;position:relative;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(65px,9vh,128px) var(--pad) 34px;z-index:2}
-    /* Layered signature: a restrained print-registration effect. */
-    .name-stack{--name-size:clamp(108px,19.4vw,340px);position:relative;isolation:isolate;width:max-content;max-width:100%;margin-left:clamp(0px,3.5vw,52px);padding:clamp(18px,2.4vw,34px) clamp(26px,4.6vw,72px) clamp(30px,4vw,60px) 0;transform:rotate(-1deg)}
-    .hero-title,.name-echo{font-family:var(--display);font-weight:900;line-height:.78;letter-spacing:-.07em;font-size:var(--name-size);text-transform:uppercase;white-space:nowrap}
+    /* Firma tipográfica. Las tiras se desplazan con el scroll, sin alterar la lectura. */
+    .signature-panel{position:relative;z-index:6;max-width:fit-content;transform:translate3d(0,calc(var(--tear,0) * -9px),0)}
+    .name-stack{--name-size:clamp(87px,13.2vw,212px);position:relative;isolation:isolate;width:max-content;max-width:100%;margin-left:clamp(8px,2vw,28px);padding:clamp(18px,2.4vw,34px) clamp(38px,5vw,76px) clamp(25px,3.8vw,55px) 0;transform:rotate(-.5deg);--tear:0}
+    .hero-title,.name-echo,.name-slice{font-family:var(--display);font-weight:900;line-height:.78;letter-spacing:-.07em;font-size:var(--name-size);text-transform:uppercase;white-space:nowrap}
     .hero-title{position:relative;z-index:3;margin:0;color:var(--milk)}
-    .hero-title sup{position:absolute;top:-3%;margin-left:7px;font-size:clamp(16px,2vw,30px);letter-spacing:-.02em;color:var(--yellow)}
-    .name-echo{position:absolute;left:0;top:clamp(18px,2.4vw,34px);pointer-events:none;user-select:none}
-    .name-echo-outline{z-index:1;color:transparent;-webkit-text-stroke:1px rgba(233,255,84,.83);transform:translate(-23px,-23px)}
-    .name-echo-under{z-index:2;color:var(--yellow);transform:translate(20px,18px);clip-path:inset(61% 0 0 0);opacity:.93}
-    .name-stack::after{content:"ESTUDIO / 001";position:absolute;right:3px;bottom:5px;font:500 10px var(--mono);letter-spacing:.12em;color:#aeb49f}
+    .hero-title sup{position:absolute;top:-5%;margin-left:6px;font-size:clamp(13px,1.35vw,21px);letter-spacing:-.02em;color:var(--yellow)}
+    .name-echo,.name-slice{position:absolute;left:0;top:clamp(18px,2.4vw,34px);pointer-events:none;user-select:none;will-change:transform}
+    .name-echo-outline{z-index:1;color:transparent;-webkit-text-stroke:1px rgba(245,255,13,.73);transform:translate(calc(-13px - var(--tear) * 48px),calc(-12px - var(--tear) * 19px)) rotate(calc(var(--tear) * -2deg))}
+    .name-echo-under{z-index:2;color:var(--yellow);transform:translate(calc(11px + var(--tear) * 76px),calc(13px + var(--tear) * 17px));clip-path:inset(61% 0 0 0);opacity:.88}
+    .name-slice{z-index:4;letter-spacing:-.07em;color:var(--milk)}
+    .name-slice-top{clip-path:inset(0 0 73% 0);transform:translate(calc(var(--tear) * -53px),calc(var(--tear) * -32px))}
+    .name-slice-mid{color:var(--yellow);clip-path:inset(43% 0 46% 0);transform:translate(calc(var(--tear) * 86px),calc(var(--tear) * 8px))}
+    .name-stack::after{content:"ESTUDIO / 001";position:absolute;right:4px;bottom:0;font:500 10px var(--mono);letter-spacing:.12em;color:#aeb49f}
+    .field-marks{margin:2px 0 0 clamp(8px,2vw,28px);display:flex;align-items:flex-start;gap:clamp(16px,2.8vw,40px);color:#bec3b2;opacity:.9}
+    .field-mark{display:flex;flex-direction:column;gap:9px;min-width:0;border-top:1px solid rgba(245,255,13,.45);padding-top:10px}
+    .field-mark span{font:500 9px var(--mono);letter-spacing:.14em;color:var(--yellow)}
+    .field-mark code{font:400 clamp(10px,.88vw,12px)/1.3 var(--mono);white-space:nowrap;color:#e4e6da;text-shadow:0 1px 8px rgba(0,0,0,.85)}
     .hero-lower{display:grid;grid-template-columns:1.2fr .8fr;align-items:end;gap:30px;position:relative;z-index:6}
     .hero-statement{font-size:clamp(31px,4.8vw,82px);letter-spacing:-.055em;line-height:.97;font-weight:600;margin:0;max-width:870px}
     .hero-statement i{font-family:var(--serif);font-weight:400;letter-spacing:-.035em;color:var(--yellow);font-size:1.13em}
     .hero-desc{justify-self:end;width:min(310px,100%);margin:0 0 10px;font-size:13px;line-height:1.7;color:#c7c8c1}
-    .hero-art{position:absolute;inset:11% -6% 4% auto;width:min(67%,940px);z-index:1;opacity:.88;pointer-events:none;transform:rotate(-6deg)}
+    .hero-art{position:absolute;inset:15% -2% 6% auto;width:min(55%,820px);z-index:1;opacity:.88;pointer-events:none;transform:rotate(-6deg)}
     .hero-art svg{width:100%;height:100%;display:block;filter:drop-shadow(-10px 18px 44px rgba(191,201,43,.13))}
     .hero-art .orbit{transform-origin:500px 490px;animation:orbit 45s linear infinite}
     .hero-art .orbit2{transform-origin:500px 490px;animation:orbit 30s linear infinite reverse}
@@ -102,7 +145,7 @@
     .interest-list{padding:0 var(--pad)}
     .interest-row{display:grid;grid-template-columns:75px minmax(0,1fr) minmax(230px,.56fr) 40px;gap:22px;align-items:center;border-top:1px solid rgba(244,242,232,.25);padding:24px 0 28px;transition:padding .3s,background .3s;color:var(--paper)}
     .interest-row:last-child{border-bottom:1px solid rgba(244,242,232,.25)}
-    .interest-row:hover{padding-left:18px;padding-right:18px;background:rgba(233,255,84,.04)}
+    .interest-row:hover{padding-left:18px;padding-right:18px;background:rgba(245,255,13,.04)}
     .interest-row:hover .interest-name{color:var(--yellow);transform:translateX(5px)}
     .interest-index{color:var(--yellow);font-family:var(--mono);font-size:12px}
     .interest-name{font-family:var(--display);font-weight:800;font-size:clamp(52px,6.2vw,104px);letter-spacing:-.04em;line-height:.85;text-transform:uppercase;transition:transform .3s,color .3s}
@@ -129,18 +172,18 @@
     .work-visual span{position:absolute;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
     .work-visual .visual-label{bottom:20px;left:23px;color:var(--yellow);z-index:3}
     .visual-vm{background:radial-gradient(circle at 60% 55%,#51593b,transparent 60%),#111410}
-    .visual-vm::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 35px,rgba(233,255,84,.09) 36px 37px),repeating-linear-gradient(90deg,transparent 0 35px,rgba(233,255,84,.09) 36px 37px);transform:perspective(330px) rotateX(28deg) scale(1.35);opacity:.7}
+    .visual-vm::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 35px,rgba(245,255,13,.09) 36px 37px),repeating-linear-gradient(90deg,transparent 0 35px,rgba(245,255,13,.09) 36px 37px);transform:perspective(330px) rotateX(28deg) scale(1.35);opacity:.7}
     .terminal-art{position:absolute;top:11%;left:12%;width:72%;height:70%;border:1px solid #bfc790;background:linear-gradient(135deg,#313a25,#171c16);transform:perspective(650px) rotateY(-14deg) rotateZ(-3deg);box-shadow:25px 20px 0 rgba(0,0,0,.33),0 15px 40px rgba(0,0,0,.2)}
     .terminal-top{height:29px;background:#dfe6bd;display:flex;align-items:center;gap:6px;padding:0 12px}
     .terminal-top i{display:block;width:6px;height:6px;border-radius:50%;background:#686e51}
     .terminal-lines{padding:22px 20px;font-family:var(--mono);font-size:clamp(9px,1.1vw,12px);line-height:2.1;color:#d3e2aa}
-    .terminal-lines b{color:#e9ff54;font-weight:400}
+    .terminal-lines b{color:#f5ff0d;font-weight:400}
     .visual-net{background:var(--yellow)}
     .visual-net::before{content:"";inset:0;position:absolute;background-image:linear-gradient(rgba(17,17,15,.15) 1px,transparent 1px),linear-gradient(90deg,rgba(17,17,15,.15) 1px,transparent 1px);background-size:26px 26px}
     .visual-net svg{position:absolute;width:100%;height:100%;inset:0;overflow:visible}
     .visual-net .visual-label{color:var(--ink)}
     .visual-web{background:linear-gradient(135deg,#33382d,#141612);display:grid;place-items:center}
-    .browser-art{width:73%;height:72%;background:#f1f0e6;color:#161713;transform:rotate(7deg);box-shadow:-24px 21px 0 rgba(233,255,84,.75);border:1px solid #171811}
+    .browser-art{width:73%;height:72%;background:#f1f0e6;color:#161713;transform:rotate(7deg);box-shadow:-24px 21px 0 rgba(245,255,13,.75);border:1px solid #171811}
     .browser-top{height:26px;border-bottom:1px solid #b2b4a7;display:flex;gap:5px;align-items:center;padding:0 12px}
     .browser-top i{width:6px;height:6px;border:1px solid #777;border-radius:50%}
     .browser-cover{padding:20px 23px}
@@ -165,7 +208,7 @@
     .inventory-footer{margin:24px var(--pad) 0;display:flex;justify-content:space-between;gap:20px;font-family:var(--mono);font-size:10px;color:#9ea29a;text-transform:uppercase;line-height:1.7}
     .inventory-footer span:first-child{color:var(--yellow)}
     /* EDUCATION / CREDITS */
-    .education{background:#e9ff54;color:#11120f;padding-bottom:clamp(80px,9vw,130px)}
+    .education{background:#f5ff0d;color:#11120f;padding-bottom:clamp(80px,9vw,130px)}
     .education-main{padding:clamp(85px,11vw,156px) var(--pad) 65px;display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:end}
     .education-main h2{font-family:var(--display);font-weight:800;line-height:.8;letter-spacing:-.06em;text-transform:uppercase;font-size:clamp(88px,12vw,190px);margin:0}
     .education-main h2 i{font-family:var(--serif);font-weight:400;text-transform:none;font-size:.8em}
@@ -192,7 +235,7 @@
     .js [data-reveal]{opacity:0;transform:translateY(25px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
     .js [data-reveal].revealed{opacity:1;transform:none}
     @media(max-width:1100px){
-      .hero{min-height:790px}.hero-art{width:75%;top:8%;right:-18%}.name-stack{--name-size:19vw}.hero-statement{font-size:clamp(39px,5.4vw,72px)}
+      .hero{min-height:790px}.hero-art{width:65%;top:11%;right:-12%}.name-stack{--name-size:13.5vw}.hero-statement{font-size:clamp(39px,5.4vw,72px)}
       .archive-title{display:block}.archive-title>p{margin-top:35px}
       .interest-row{grid-template-columns:53px minmax(0,1fr) minmax(200px,.6fr) 25px;gap:12px}
     }
@@ -208,11 +251,38 @@
       .hero{min-height:780px;min-height:calc(100svh - 68px);max-height:none}
       .hero-top{padding-top:21px}.hero-top span:last-child{display:none}
       .hero-body{padding:clamp(105px,17vh,170px) var(--pad) 36px;justify-content:space-between}
-      .name-stack{--name-size:23.4vw;margin-left:13px;padding:30px 25px 45px 0}
-      .name-echo{top:30px}.name-echo-outline{transform:translate(-11px,-15px);-webkit-text-stroke:1px rgba(233,255,84,.8)}.name-echo-under{transform:translate(13px,13px)}
-      .name-stack::after{font-size:8px;right:-2px;bottom:10px}
-      .hero-title sup{top:-6%;font-size:14px;margin-left:5px}
-      .hero-art{right:-52%;top:14%;width:130%;opacity:.64}
+      .name-stack{--name-size:18.7vw;margin-left:8px;padding:25px 34px 33px 0}
+      .name-echo,.name-slice{top:25px}
+      .name-echo-outline{transform:translate(calc(-8px - var(--tear) * 22px),calc(-9px - var(--tear) * 9px))}
+      .name-echo-under{transform:translate(calc(7px + var(--tear) * 33px),calc(8px + var(--tear) * 9px))}
+      .name-slice-top{transform:translate(calc(var(--tear) * -26px),calc(var(--tear) * -16px))}
+      .name-slice-mid{transform:translate(calc(var(--tear) * 30px),calc(var(--tear) * 4px))}
+      .name-stack::after{font-size:8px;right:4px;bottom:-1px}
+      .hero-title sup{top:-6%;font-size:11px;margin-left:4px}
+      .field-marks{gap:19px;margin:15px 0 0 8px}.field-mark span{font-size:8px}.field-mark code{font-size:9px}
+      .hero-art{right:-37%;top:19%;width:101%;opacity:.64}
+      /* En móvil siguen viéndose marcas repartidas; tipografía y lectura siempre por delante. */
+      .math-glyph{opacity:.67}
+      .glyph-sum{left:67%;top:18%;font-size:31px}
+      .glyph-integral{left:19%;top:45%;font-size:37px;opacity:.5}
+      .glyph-pi{left:29%;top:16%;font-size:25px}
+      .glyph-nabla{left:84%;top:65%;font-size:21px}
+      .glyph-infinity{left:6%;top:49%;font-size:23px;opacity:.48}
+      .glyph-theta{left:76%;top:42%;font-size:21px}
+      .glyph-delta{left:52%;top:18%;font-size:22px}
+      .glyph-partial{left:84%;top:11%;font-size:23px}
+      .glyph-root{left:9%;top:23%;font-size:22px}
+      .glyph-limit{left:51%;top:43%;font-size:10px}
+      .glyph-primitive{left:11%;top:58%;font-size:10px}
+      .glyph-chain{left:54%;top:74%;font-size:9px}
+      .glyph-derivative{left:40%;top:11%;font-size:10px}
+      .glyph-power{left:65%;top:59%;font-size:10px}
+      .code-annotation{font-size:8px;opacity:.4}
+      .code-annotation-a,.code-annotation-b,.code-annotation-e{display:none}
+      .code-annotation-c{left:55%;top:28%}
+      .code-annotation-d{left:47%;bottom:11%}
+      .matrix-trace{right:0;top:14%;opacity:.14;gap:10px} .matrix-trace span{font-size:8px;letter-spacing:8px}
+      .matrix-trace--secondary{left:40%;right:auto;top:29%;bottom:39%;opacity:.085;gap:9px}
       .hero-lower{display:block}.hero-statement{font-size:clamp(40px,10vw,70px);max-width:490px}
       .hero-desc{font-size:12px;max-width:320px;margin:24px 0 0;line-height:1.65}
       .hero-footer{grid-template-columns:1fr auto;font-size:9px;gap:8px}.hero-footer .scroll{justify-content:flex-end}.hero-footer>span:last-child{display:none}.scroll-line{width:25px}
@@ -233,10 +303,15 @@
       .outro-header{padding-top:100px}.outro-header h2{font-size:17vw}.outro-info{display:block;padding-bottom:120px}.outro-info p{font-size:clamp(24px,6.6vw,33px);margin-bottom:37px}.footer{flex-direction:column;align-items:flex-start}
     }
     @media(max-width:400px){
-      .hero{min-height:700px}.hero-art{top:20%;right:-67%;width:150%}.name-stack{--name-size:23vw}.hero-statement{font-size:38px}.hero-top{font-size:9px}.hero-footer{font-size:8px}
+      .hero{min-height:700px}.hero-art{top:24%;right:-39%;width:109%}.name-stack{--name-size:18.2vw}.field-marks{gap:10px}.field-mark code{font-size:8px}.hero-statement{font-size:38px}.hero-top{font-size:9px}.hero-footer{font-size:8px}
       .about-display{font-size:18vw}.interests-intro h2{font-size:19vw}.archive-title h2{font-size:19vw}.inventory-head h2{font-size:20vw}.education-main h2{font-size:20vw}.outro-header h2{font-size:17vw}
     }
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ticker-track,.hero-art .orbit,.hero-art .orbit2{animation:none!important}.js [data-reveal]{opacity:1!important;transform:none!important;transition:none!important}*{transition-duration:.01ms!important}}
+    .contact-line{border-top:1px solid rgba(244,242,232,.22);margin:0 var(--pad) 48px;padding:24px 0 0;display:flex;justify-content:space-between;align-items:center;gap:20px}
+    .contact-line>span{color:#a2a797;font:500 10px var(--mono);letter-spacing:.1em}
+    .contact-line a{font:500 clamp(12px,1.35vw,17px) var(--mono);color:var(--yellow);border-bottom:1px solid var(--yellow);padding-bottom:6px;display:inline-flex;align-items:center;gap:clamp(15px,2vw,30px);transition:color .2s,border-color .2s}
+    .contact-line a:hover{color:var(--paper);border-color:var(--paper)}
+    @media(max-width:760px){.contact-line{flex-direction:column;align-items:flex-start;margin-bottom:45px;gap:18px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ticker-track,.hero-art .orbit,.hero-art .orbit2,.matrix-trace span,.math-glyph,.code-annotation{animation:none!important}.name-stack{--tear:0!important}.js [data-reveal]{opacity:1!important;transform:none!important;transition:none!important}*{transition-duration:.01ms!important}}
   </style>
 </head>
 <body>
@@ -244,7 +319,7 @@
   <header class="masthead">
     <a class="brand" href="#inicio" aria-label="Jahir, volver al inicio">JAHIR<span>®</span></a>
     <nav class="nav-links" id="main-nav" aria-label="Navegación principal">
-      <a href="#perfil">01 / Perfil</a><a href="#intereses">02 / Enfoque</a><a href="#archivo">03 / Archivo</a><a href="#herramientas">04 / Recursos</a><a href="#formacion">05 / Formación</a>
+      <a href="#perfil">01 / Perfil</a><a href="#intereses">02 / Enfoque</a><a href="#archivo">03 / Archivo</a><a href="#herramientas">04 / Recursos</a><a href="#formacion">05 / Formación</a><a href="#contacto">06 / Contacto</a>
     </nav>
     <div class="header-right"><span class="pulse" aria-hidden="true"></span><span>PORTAFOLIO / 2026</span></div>
     <button class="menu-toggle" aria-label="Abrir menú" aria-controls="main-nav" aria-expanded="false" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button>
@@ -252,18 +327,46 @@
   <main id="contenido">
     <section class="hero" id="inicio" aria-labelledby="hero-title">
       <div class="hero-top eyebrow"><span>PERFIL / CIENCIAS Y TECNOLOGÍA</span><span>CIENCIA — TECNOLOGÍA — HUMANIDADES</span></div>
+      <!-- Detalles de matemáticas y lógica integrados en la malla, todos decorativos. -->
+      <div class="hero-ambient" aria-hidden="true">
+        <span class="math-glyph glyph-sum">∑</span>
+        <span class="math-glyph glyph-integral">∫</span>
+        <span class="math-glyph glyph-pi">π</span>
+        <span class="math-glyph glyph-nabla">∇</span>
+        <span class="math-glyph glyph-infinity">∞</span>
+        <span class="math-glyph glyph-theta">θ</span>
+        <span class="math-glyph glyph-delta">Δ</span>
+        <span class="math-glyph glyph-partial">∂</span>
+        <span class="math-glyph glyph-root">√</span>
+        <span class="math-glyph math-equation glyph-limit">lim x→0</span>
+        <span class="math-glyph math-equation glyph-primitive">∫ x dx</span>
+        <span class="math-glyph math-equation glyph-chain">f′(g(x)) · g′(x)</span>
+        <span class="math-glyph math-equation glyph-derivative">d/dx</span>
+        <span class="math-glyph math-equation glyph-power">x² + y²</span>
+        <span class="code-annotation code-annotation-a">0101 / 0011 / 1010</span>
+        <span class="code-annotation code-annotation-b">{ 0x01 : 0x0F }</span>
+        <span class="code-annotation code-annotation-c">def main():</span>
+        <span class="code-annotation code-annotation-d">for (i = 0; i &lt; n; ++i)</span>
+        <span class="code-annotation code-annotation-e">if (ready) { return 1; }</span>
+        <div class="matrix-trace">
+          <span>010110011001101</span><span>110010100101110</span><span>001101010110010</span><span>101100011010011</span><span>010101101001011</span><span>101001101100010</span><span>011011001010110</span><span>100100111001011</span>
+        </div>
+        <div class="matrix-trace matrix-trace--secondary">
+          <span>011001101010100</span><span>100110010010111</span><span>011010011010001</span><span>101101001011011</span>
+        </div>
+      </div>
       <div class="hero-art" aria-hidden="true">
         <svg viewBox="0 0 1000 1000" role="presentation" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <radialGradient id="sphere" cx="31%" cy="21%" r="79%"><stop offset="0" stop-color="#f7ff9b"/><stop offset=".27" stop-color="#e9ff54"/><stop offset=".6" stop-color="#73822f"/><stop offset=".8" stop-color="#2d3420"/><stop offset="1" stop-color="#0d0e0b"/></radialGradient>
-            <linearGradient id="ring" x1="0" x2="1" y1="1" y2="0"><stop stop-color="#505a31"/><stop offset=".55" stop-color="#e9ff54"/><stop offset="1" stop-color="#fffccc"/></linearGradient>
+            <radialGradient id="sphere" cx="31%" cy="21%" r="79%"><stop offset="0" stop-color="#f7ff9b"/><stop offset=".27" stop-color="#f5ff0d"/><stop offset=".6" stop-color="#73822f"/><stop offset=".8" stop-color="#2d3420"/><stop offset="1" stop-color="#0d0e0b"/></radialGradient>
+            <linearGradient id="ring" x1="0" x2="1" y1="1" y2="0"><stop stop-color="#505a31"/><stop offset=".55" stop-color="#f5ff0d"/><stop offset="1" stop-color="#fffccc"/></linearGradient>
             <clipPath id="c"><circle cx="500" cy="490" r="288"/></clipPath>
             <pattern id="lines" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(-21)"><path d="M0 0V22" stroke="#f3ffcd" stroke-width="1.4" opacity=".46"/></pattern>
             <filter id="glow"><feGaussianBlur stdDeviation="19"/></filter>
           </defs>
-          <circle cx="500" cy="490" r="288" fill="#b9ff38" opacity=".23" filter="url(#glow)"/>
+          <circle cx="500" cy="490" r="288" fill="#edff12" opacity=".23" filter="url(#glow)"/>
           <g class="orbit"><ellipse cx="500" cy="490" rx="414" ry="173" transform="rotate(-33 500 490)" fill="none" stroke="#f3ffb8" stroke-width="2.3" opacity=".7"/><ellipse cx="500" cy="490" rx="439" ry="198" transform="rotate(48 500 490)" fill="none" stroke="#8c9851" stroke-width="1.5" stroke-dasharray="4 12"/></g>
-          <g class="orbit2"><circle cx="500" cy="490" r="354" fill="none" stroke="#e9ff54" stroke-width="1.1" stroke-dasharray="4 19"/><circle cx="500" cy="490" r="405" fill="none" stroke="#a0b03b" stroke-width="1" opacity=".54"/><circle cx="855" cy="490" r="8" fill="#e9ff54"/><circle cx="145" cy="490" r="5" fill="#e9ff54"/></g>
+          <g class="orbit2"><circle cx="500" cy="490" r="354" fill="none" stroke="#f5ff0d" stroke-width="1.1" stroke-dasharray="4 19"/><circle cx="500" cy="490" r="405" fill="none" stroke="#a0b03b" stroke-width="1" opacity=".54"/><circle cx="855" cy="490" r="8" fill="#f5ff0d"/><circle cx="145" cy="490" r="5" fill="#f5ff0d"/></g>
           <circle cx="500" cy="490" r="288" fill="url(#sphere)"/>
           <g clip-path="url(#c)"><circle cx="500" cy="490" r="288" fill="url(#lines)" opacity=".66"/>
             <g fill="none" stroke="#f7ffc9" stroke-width="1.2" opacity=".62">
@@ -276,16 +379,20 @@
           </g>
           <ellipse cx="500" cy="490" rx="400" ry="135" transform="rotate(-33 500 490)" fill="none" stroke="url(#ring)" stroke-width="13"/>
           <ellipse cx="500" cy="490" rx="400" ry="135" transform="rotate(-33 500 490)" fill="none" stroke="#10120f" stroke-width="4" opacity=".42" stroke-dasharray="12 17"/>
-          <path d="M173 742h137m-137 0v-55M765 236h110m0 0v55" stroke="#e9ff54" fill="none" stroke-width="2"/>
+          <path d="M173 742h137m-137 0v-55M765 236h110m0 0v55" stroke="#f5ff0d" fill="none" stroke-width="2"/>
           <circle cx="500" cy="490" r="296" fill="none" stroke="#f9ffe2" opacity=".22" stroke-width="1"/>
-          <g font-family="monospace" fill="#deff89" font-size="15" letter-spacing="2"><text x="100" y="680">N. 0087 / CURIOSITY</text><text x="645" y="185">FIG. 001 — SYSTEMS</text><text x="734" y="820">360° / ANALYSIS</text></g>
+          <g font-family="monospace" fill="#e7f76a" font-size="15" letter-spacing="2"><text x="100" y="680">N. 0087 / CURIOSITY</text><text x="645" y="185">FIG. 001 — SYSTEMS</text><text x="734" y="820">360° / ANALYSIS</text></g>
         </svg>
       </div>
       <div class="hero-body">
-        <div class="name-stack">
-          <span class="name-echo name-echo-outline" aria-hidden="true">JAHIR</span>
-          <span class="name-echo name-echo-under" aria-hidden="true">JAHIR</span>
-          <h1 class="hero-title" id="hero-title">JAHIR<sup>®</sup></h1>
+        <div class="signature-panel">
+          <div class="name-stack">
+            <span class="name-echo name-echo-outline" aria-hidden="true">JAHIR</span>
+            <span class="name-echo name-echo-under" aria-hidden="true">JAHIR</span>
+            <h1 class="hero-title" id="hero-title">JAHIR<sup>®</sup></h1>
+            <span class="name-slice name-slice-top" aria-hidden="true">JAHIR</span>
+            <span class="name-slice name-slice-mid" aria-hidden="true">JAHIR</span>
+          </div>
         </div>
         <div class="hero-lower">
           <p class="hero-statement">CIENCIA & SISTEMAS.<br><i>Perspectiva humana.</i></p>
@@ -325,7 +432,7 @@
         <div class="work-content"><div class="work-visual visual-net"><svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="none" stroke="#161812" stroke-width="1.5" opacity=".9"><path d="M35 60L170 91L261 29L392 78L546 37M170 91L127 230L280 204L392 78L521 218L280 204M35 60L127 230M261 29L280 204M392 78L521 218M127 230L521 218"/></g><g fill="#161812"><circle cx="35" cy="60" r="7"/><circle cx="170" cy="91" r="7"/><circle cx="261" cy="29" r="7"/><circle cx="392" cy="78" r="7"/><circle cx="546" cy="37" r="7"/><circle cx="127" cy="230" r="7"/><circle cx="280" cy="204" r="15"/><circle cx="521" cy="218" r="7"/></g><g fill="none" stroke="#161812"><circle cx="280" cy="204" r="32"/><circle cx="280" cy="204" r="49" stroke-dasharray="2 5"/><circle cx="392" cy="78" r="19"/></g></svg><span class="visual-label">FIG 02 / NODOS Y CONEXIONES</span></div><div class="work-copy"><p>Primer acercamiento a la identificación de dispositivos, direcciones MAC, protocolos, puertos y conceptos de seguridad en redes.</p><small>También he explorado fundamentos de infraestructura física, fibra óptica, proxies y firewalls. Conocimientos introductorios en desarrollo.</small></div></div>
       </details>
       <details class="work"><summary><span class="work-index">003</span><span class="work-title">PRIMERAS PÁGINAS WEB</span><span class="work-meta">WEB / APRENDIZAJE</span><span class="plus" aria-hidden="true">+</span></summary>
-        <div class="work-content"><div class="work-visual visual-web"><div class="browser-art"><div class="browser-top"><i></i><i></i><i></i></div><div class="browser-cover"><strong>IDEAS<br>EN WEB.</strong><div></div><div></div></div></div><span class="visual-label">FIG 03 / DISEÑO Y CÓDIGO</span></div><div class="work-copy"><p>Experimentos personales de desarrollo web, con un enfoque inicial en estructura, presentación visual y comprensión de cómo se construyen las páginas.</p><small>Conocimientos básicos de CSS y Python. Este mismo portafolio forma parte del proceso de aprendizaje.</small></div></div>
+        <div class="work-content"><div class="work-visual visual-web"><div class="browser-art"><div class="browser-top"><i></i><i></i><i></i></div><div class="browser-cover"><strong>IDEAS<br>EN WEB.</strong><div></div><div></div></div></div><span class="visual-label">FIG 03 / DISEÑO Y CÓDIGO</span></div><div class="work-copy"><p>Experimentos personales de desarrollo web, con un enfoque inicial en estructura, presentación visual y comprensión de cómo se construyen las páginas.</p><small>Conocimientos básicos de CSS para estilos web. Este mismo portafolio forma parte del proceso de aprendizaje.</small></div></div>
       </details>
     </section>
     <section class="inventory" id="herramientas" aria-labelledby="herramientas-title">
@@ -334,7 +441,7 @@
       <div class="inventory-grid">
         <div class="inventory-col"><span class="tag">01 / OPERATIVOS</span><h3>SISTEMAS &<br>ENTORNOS</h3><p>Windows 7, 8, 10 y 11<br>Linux: Kali, Ubuntu, Arch y Parrot<br>Máquinas virtuales<br>Configuraciones básicas de firewall</p></div>
         <div class="inventory-col"><span class="tag">02 / OBSERVACIÓN</span><h3>HERRAMIENTAS<br>DE SEGURIDAD</h3><p>Nmap<br>Wireshark<br>Burp Suite<br>SQLmap<br>BlackForce (exploración personal)</p></div>
-        <div class="inventory-col"><span class="tag">03 / BASES TÉCNICAS</span><h3>REDES &<br>PROGRAMACIÓN</h3><p>Python y CSS — nivel básico<br>Protocolos, puertos y direcciones MAC<br>Proxies y fundamentos de conectividad<br>Componentes físicos de redes</p></div>
+        <div class="inventory-col"><span class="tag">03 / BASES TÉCNICAS</span><h3>REDES &<br>PROGRAMACIÓN</h3><p>Python y C++ — nivel básico<br>CSS — estilos y presentación web<br>Protocolos, puertos y direcciones MAC<br>Proxies y fundamentos de conectividad<br>Componentes físicos de redes</p></div>
       </div>
       <div class="inventory-footer"><span>SISTEMAS / REDES / PROGRAMACIÓN</span><span>Conocimientos iniciales y prácticas personales.</span></div>
     </section>
@@ -349,6 +456,7 @@
       <div class="outro-top"><span class="section-number">[ EPÍLOGO / 06 ]</span><span class="eyebrow">CONOCIMIENTO Y RESPONSABILIDAD</span></div>
       <div class="outro-header"><p class="kicker">UNA REFLEXIÓN FINAL / CIENCIA Y SOCIEDAD</p><h2 id="contacto-title" data-reveal>CONOCER.<br><em>Compartir.</em></h2></div>
       <div class="outro-info"><p>«Lo que sabemos adquiere sentido cuando nos ayuda a comprender mejor el mundo y a mejorar, aunque sea un poco, la vida de otros».</p><a class="back-top" href="#inicio">VOLVER AL INICIO <span aria-hidden="true">↗</span></a></div>
+      <div class="contact-line"><span>CONTACTO / REPOSITORIOS PÚBLICOS</span><a href="https://github.com/ausername0004-ops" target="_blank" rel="noopener noreferrer" aria-label="Perfil de Jahir en GitHub, ausername0004-ops">GITHUB / ausername0004-ops <span aria-hidden="true">↗</span></a></div>
       <footer class="footer"><span><b>JAHIR®</b> / ARCHIVO PERSONAL</span><span>CIENCIA · SISTEMAS · CURIOSIDAD</span><span>© <span id="year">2026</span> — PORTAFOLIO PERSONAL</span></footer>
     </section>
   </main>
@@ -365,6 +473,23 @@
       nav.classList.remove('is-open');menuButton.setAttribute('aria-expanded','false');menuButton.setAttribute('aria-label','Abrir menú');
     }));
     document.getElementById('year').textContent=new Date().getFullYear();
+    // Interacción de capas guiada por la posición real del scroll; sin bibliotecas externas.
+    const signature=document.querySelector('.name-stack');
+    const hero=document.querySelector('.hero');
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+      let pending=false;
+      const updateTear=()=>{
+        const rect=hero.getBoundingClientRect();
+        const moved=Math.max(0,-rect.top);
+        const t=Math.min(1,Math.max(0,moved/(Math.min(hero.offsetHeight*.34,255))));
+        signature.style.setProperty('--tear',t.toFixed(3));
+        pending=false;
+      };
+      const queueTear=()=>{if(!pending){pending=true;requestAnimationFrame(updateTear)}};
+      addEventListener('scroll',queueTear,{passive:true});
+      addEventListener('resize',queueTear,{passive:true});
+      updateTear();
+    }
     const targets=document.querySelectorAll('[data-reveal]');
     if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches){
       const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('revealed');observer.unobserve(entry.target)}})},{threshold:.12,rootMargin:'0px 0px -15px 0px'});

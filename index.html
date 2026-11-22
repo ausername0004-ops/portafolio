@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Jahir — portafolio personal. Ciencias, matemáticas, física y exploraciones en redes y ciberseguridad.">
+  <meta name="theme-color" content="#11110f">
+  <meta property="og:title" content="Jahir — Ciencia · Sistemas · Curiosidad">
+  <meta property="og:description" content="Un archivo personal de intereses, aprendizaje y exploraciones técnicas.">
+  <title>JAHIR® — Ciencia / Sistemas / Curiosidad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <style>
+    :root{
+      --ink:#12120f;--ink2:#20211c;--paper:#ebe9e0;--milk:#f4f2e8;--yellow:#e9ff54;--yellow2:#d6ed43;--gray:#9a9d97;--line:rgba(20,20,17,.18);
+      --sans:'DM Sans','Inter Display','Arial',sans-serif;
+      --display:'Barlow Condensed','Impact','Arial Narrow',sans-serif;
+      --mono:'IBM Plex Mono','Liberation Mono',monospace;
+      --serif:'Instrument Serif','Times New Roman',serif;
+      --pad:clamp(22px,4.4vw,82px);
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:76px;overflow-x:clip}
+    body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    ::selection{color:var(--ink);background:var(--yellow)}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    button,a{ -webkit-tap-highlight-color:transparent }
+    a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--yellow);outline-offset:5px}
+    .skip{position:absolute;left:12px;top:-60px;background:var(--yellow);color:var(--ink);padding:10px;z-index:999}
+    .skip:focus{top:10px}
+    .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+    .mono,.eyebrow,.nav-links,.section-number,.fig-note,.micro,.tape,.work-meta,.work-index,.pill,.footnote{font-family:var(--mono)}
+    .eyebrow,.section-number,.micro{font-size:10px;letter-spacing:.095em;text-transform:uppercase}
+    .nowrap{white-space:nowrap}
+    .masthead{position:relative;z-index:50;height:78px;border-bottom:1px solid rgba(244,242,232,.21);background:var(--ink);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 var(--pad)}
+    .brand{font-family:var(--display);font-weight:900;letter-spacing:-.055em;font-size:35px;line-height:1;display:inline-flex;align-items:start;width:max-content}
+    .brand span{color:var(--yellow);font-size:18px;letter-spacing:-.02em;margin-left:4px;align-self:start}
+    .nav-links{display:flex;gap:32px;align-items:center;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+    .nav-links a{position:relative;padding:10px 0;transition:color .25s}
+    .nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:4px;height:1px;background:var(--yellow);transition:right .3s}
+    .nav-links a:hover{color:var(--yellow)}.nav-links a:hover::after{right:0}
+    .header-right{justify-self:end;display:flex;align-items:center;gap:11px;font-family:var(--mono);font-size:10px;letter-spacing:.055em}
+    .pulse{width:8px;height:8px;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 5px rgba(233,255,84,.10)}
+    .menu-toggle{display:none;background:none;border:1px solid rgba(244,242,232,.35);color:var(--paper);width:42px;height:42px;align-items:center;justify-content:center;cursor:pointer}
+    .menu-toggle svg{width:21px;stroke:currentColor}
+    /* HERO: an art-directed magazine cover, not a stack of cards */
+    .hero{position:relative;min-height:min(900px,calc(100svh - 78px));isolation:isolate;overflow:hidden;background:radial-gradient(ellipse 60% 60% at 68% 50%,#282d20 0,rgba(22,24,19,.66) 48%,transparent 72%),var(--ink);display:flex;flex-direction:column}
+    .hero::before{content:"";z-index:-1;position:absolute;inset:0;opacity:.26;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:68px 68px;mask-image:linear-gradient(90deg,transparent,#000 34%,#000 85%,transparent)}
+    .hero::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:4;opacity:.2;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E")}
+    .hero-top{padding:31px var(--pad) 0;display:flex;align-items:center;justify-content:space-between;z-index:6;position:relative}
+    .hero-top span:last-child{color:var(--gray)}
+    .hero-body{flex:1;position:relative;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(65px,9vh,128px) var(--pad) 34px;z-index:2}
+    /* Layered signature: a restrained print-registration effect. */
+    .name-stack{--name-size:clamp(108px,19.4vw,340px);position:relative;isolation:isolate;width:max-content;max-width:100%;margin-left:clamp(0px,3.5vw,52px);padding:clamp(18px,2.4vw,34px) clamp(26px,4.6vw,72px) clamp(30px,4vw,60px) 0;transform:rotate(-1deg)}
+    .hero-title,.name-echo{font-family:var(--display);font-weight:900;line-height:.78;letter-spacing:-.07em;font-size:var(--name-size);text-transform:uppercase;white-space:nowrap}
+    .hero-title{position:relative;z-index:3;margin:0;color:var(--milk)}
+    .hero-title sup{position:absolute;top:-3%;margin-left:7px;font-size:clamp(16px,2vw,30px);letter-spacing:-.02em;color:var(--yellow)}
+    .name-echo{position:absolute;left:0;top:clamp(18px,2.4vw,34px);pointer-events:none;user-select:none}
+    .name-echo-outline{z-index:1;color:transparent;-webkit-text-stroke:1px rgba(233,255,84,.83);transform:translate(-23px,-23px)}
+    .name-echo-under{z-index:2;color:var(--yellow);transform:translate(20px,18px);clip-path:inset(61% 0 0 0);opacity:.93}
+    .name-stack::after{content:"ESTUDIO / 001";position:absolute;right:3px;bottom:5px;font:500 10px var(--mono);letter-spacing:.12em;color:#aeb49f}
+    .hero-lower{display:grid;grid-template-columns:1.2fr .8fr;align-items:end;gap:30px;position:relative;z-index:6}
+    .hero-statement{font-size:clamp(31px,4.8vw,82px);letter-spacing:-.055em;line-height:.97;font-weight:600;margin:0;max-width:870px}
+    .hero-statement i{font-family:var(--serif);font-weight:400;letter-spacing:-.035em;color:var(--yellow);font-size:1.13em}
+    .hero-desc{justify-self:end;width:min(310px,100%);margin:0 0 10px;font-size:13px;line-height:1.7;color:#c7c8c1}
+    .hero-art{position:absolute;inset:11% -6% 4% auto;width:min(67%,940px);z-index:1;opacity:.88;pointer-events:none;transform:rotate(-6deg)}
+    .hero-art svg{width:100%;height:100%;display:block;filter:drop-shadow(-10px 18px 44px rgba(191,201,43,.13))}
+    .hero-art .orbit{transform-origin:500px 490px;animation:orbit 45s linear infinite}
+    .hero-art .orbit2{transform-origin:500px 490px;animation:orbit 30s linear infinite reverse}
+    @keyframes orbit{to{transform:rotate(360deg)}}
+    .hero-footer{z-index:6;position:relative;border-top:1px solid rgba(244,242,232,.26);padding:20px var(--pad);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;font-family:var(--mono);font-size:10px;letter-spacing:.065em;text-transform:uppercase}
+    .hero-footer .scroll{display:flex;gap:14px;align-items:center;justify-content:center;color:var(--yellow)}
+    .scroll-line{height:1px;width:55px;background:currentColor}
+    .hero-footer>span:last-child{text-align:right}
+    .ticker{background:var(--yellow);color:var(--ink);height:84px;display:flex;align-items:center;overflow:hidden;border-block:1px solid var(--ink)}
+    .ticker-track{display:flex;gap:0;width:max-content;animation:marquee 38s linear infinite}
+    .ticker-track span{display:inline-flex;align-items:center;gap:26px;white-space:nowrap;text-transform:uppercase;font-family:var(--display);font-size:clamp(32px,4vw,65px);font-weight:900;line-height:1;padding:0 13px}
+    .ticker-track b{font-family:var(--serif);font-size:.8em;font-weight:400;font-style:italic}
+    @keyframes marquee{to{transform:translateX(-50%)}}
+    .paper{color:var(--ink);background:var(--paper)}
+    .section-head{display:flex;justify-content:space-between;align-items:center;padding:30px var(--pad) 0;gap:12px}
+    .section-head span:last-child{opacity:.66}
+    .about{padding:0 0 clamp(100px,14vw,190px)}
+    .about-layout{padding:clamp(92px,11vw,180px) var(--pad) 0;display:grid;grid-template-columns:1.28fr .72fr;gap:clamp(30px,6vw,120px);align-items:end}
+    .about-display{margin:0;font-family:var(--display);font-size:clamp(83px,11vw,208px);font-weight:800;letter-spacing:-.051em;line-height:.83;text-transform:uppercase}
+    .about-display em{font-family:var(--serif);text-transform:none;font-weight:400;letter-spacing:-.04em;line-height:.8}
+    .about-aside{padding:0 0 5px}
+    .tiny-rule{height:1px;background:var(--ink);margin:0 0 21px}
+    .about-aside .lead{font-size:clamp(21px,2.25vw,33px);letter-spacing:-.035em;line-height:1.26;margin:0 0 32px;font-weight:600}
+    .about-aside p:last-child{font-size:14px;line-height:1.85;margin:0;color:#51534e}
+    .definition{margin:90px var(--pad) 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;padding-top:22px}
+    .definition p{font-family:var(--mono);font-size:11px;margin:0;color:#555952}
+    .definition p:last-child{text-align:right}
+    /* INTERESTS / INDEX */
+    .interests{background:#171814;color:var(--paper);padding-bottom:clamp(95px,13vw,180px)}
+    .interests-intro{padding:clamp(70px,9vw,140px) var(--pad) 55px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end}
+    .interests-intro h2{font-family:var(--display);text-transform:uppercase;font-size:clamp(74px,9.2vw,160px);font-weight:800;line-height:.82;letter-spacing:-.055em;margin:0}
+    .interests-intro h2 em{font-family:var(--serif);font-weight:400;text-transform:none;color:var(--yellow)}
+    .interests-intro p{max-width:390px;justify-self:end;color:#b9bbb2;font-size:15px;line-height:1.8;margin:0 0 8px}
+    .interest-list{padding:0 var(--pad)}
+    .interest-row{display:grid;grid-template-columns:75px minmax(0,1fr) minmax(230px,.56fr) 40px;gap:22px;align-items:center;border-top:1px solid rgba(244,242,232,.25);padding:24px 0 28px;transition:padding .3s,background .3s;color:var(--paper)}
+    .interest-row:last-child{border-bottom:1px solid rgba(244,242,232,.25)}
+    .interest-row:hover{padding-left:18px;padding-right:18px;background:rgba(233,255,84,.04)}
+    .interest-row:hover .interest-name{color:var(--yellow);transform:translateX(5px)}
+    .interest-index{color:var(--yellow);font-family:var(--mono);font-size:12px}
+    .interest-name{font-family:var(--display);font-weight:800;font-size:clamp(52px,6.2vw,104px);letter-spacing:-.04em;line-height:.85;text-transform:uppercase;transition:transform .3s,color .3s}
+    .interest-row p{margin:0;color:#b4b7ae;font-size:13px;line-height:1.7}
+    .interest-arrow{font-size:34px;font-weight:300;justify-self:end;color:var(--yellow)}
+    /* FIELD NOTES / projects */
+    .archive{background:#dfdfd4;color:var(--ink);padding-bottom:clamp(110px,14vw,190px)}
+    .archive-title{padding:clamp(82px,10vw,145px) var(--pad) 60px;display:flex;justify-content:space-between;gap:30px;align-items:end}
+    .archive-title h2{margin:0;font-family:var(--display);text-transform:uppercase;font-weight:800;font-size:clamp(95px,15vw,250px);letter-spacing:-.06em;line-height:.68}
+    .archive-title .serif{font-family:var(--serif);font-weight:400;font-size:clamp(50px,7.8vw,135px);letter-spacing:-.055em;font-style:italic;display:block;text-transform:none;margin-left:clamp(34px,8vw,155px);line-height:1.2}
+    .archive-title>p{font-size:14px;max-width:270px;line-height:1.7;margin:0 0 12px;color:#555950}
+    .work{margin:0 var(--pad);border-top:1px solid rgba(18,18,15,.40)}
+    .work:last-child{border-bottom:1px solid rgba(18,18,15,.4)}
+    .work summary{cursor:pointer;list-style:none;display:grid;grid-template-columns:60px minmax(0,1fr) 200px 30px;align-items:center;gap:18px;padding:22px 0}
+    .work summary::-webkit-details-marker{display:none}
+    .work-index{font-size:11px;color:#61645e}
+    .work-title{font-family:var(--display);font-size:clamp(42px,5.5vw,84px);letter-spacing:-.035em;line-height:.94;font-weight:800;text-transform:uppercase;transition:transform .25s}
+    .work summary:hover .work-title{transform:translateX(8px)}
+    .work-meta{text-transform:uppercase;font-size:10px;color:#666960}
+    .plus{justify-self:end;border:1px solid var(--ink);border-radius:50%;width:30px;height:30px;display:grid;place-items:center;font-size:23px;line-height:1;transition:transform .25s,background .25s}
+    .work[open] .plus{transform:rotate(45deg);background:var(--yellow)}
+    .work-content{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(20px,5vw,90px);padding:6px 0 45px 78px}
+    .work-visual{min-height:290px;position:relative;overflow:hidden;border:1px solid rgba(18,18,15,.22);background:#20221c}
+    .work-visual span{position:absolute;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+    .work-visual .visual-label{bottom:20px;left:23px;color:var(--yellow);z-index:3}
+    .visual-vm{background:radial-gradient(circle at 60% 55%,#51593b,transparent 60%),#111410}
+    .visual-vm::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 35px,rgba(233,255,84,.09) 36px 37px),repeating-linear-gradient(90deg,transparent 0 35px,rgba(233,255,84,.09) 36px 37px);transform:perspective(330px) rotateX(28deg) scale(1.35);opacity:.7}
+    .terminal-art{position:absolute;top:11%;left:12%;width:72%;height:70%;border:1px solid #bfc790;background:linear-gradient(135deg,#313a25,#171c16);transform:perspective(650px) rotateY(-14deg) rotateZ(-3deg);box-shadow:25px 20px 0 rgba(0,0,0,.33),0 15px 40px rgba(0,0,0,.2)}
+    .terminal-top{height:29px;background:#dfe6bd;display:flex;align-items:center;gap:6px;padding:0 12px}
+    .terminal-top i{display:block;width:6px;height:6px;border-radius:50%;background:#686e51}
+    .terminal-lines{padding:22px 20px;font-family:var(--mono);font-size:clamp(9px,1.1vw,12px);line-height:2.1;color:#d3e2aa}
+    .terminal-lines b{color:#e9ff54;font-weight:400}
+    .visual-net{background:var(--yellow)}
+    .visual-net::before{content:"";inset:0;position:absolute;background-image:linear-gradient(rgba(17,17,15,.15) 1px,transparent 1px),linear-gradient(90deg,rgba(17,17,15,.15) 1px,transparent 1px);background-size:26px 26px}
+    .visual-net svg{position:absolute;width:100%;height:100%;inset:0;overflow:visible}
+    .visual-net .visual-label{color:var(--ink)}
+    .visual-web{background:linear-gradient(135deg,#33382d,#141612);display:grid;place-items:center}
+    .browser-art{width:73%;height:72%;background:#f1f0e6;color:#161713;transform:rotate(7deg);box-shadow:-24px 21px 0 rgba(233,255,84,.75);border:1px solid #171811}
+    .browser-top{height:26px;border-bottom:1px solid #b2b4a7;display:flex;gap:5px;align-items:center;padding:0 12px}
+    .browser-top i{width:6px;height:6px;border:1px solid #777;border-radius:50%}
+    .browser-cover{padding:20px 23px}
+    .browser-cover strong{font-family:var(--display);font-size:clamp(50px,6vw,95px);line-height:.8;letter-spacing:-.05em}
+    .browser-cover div{margin-top:21px;height:8px;width:70%;background:#171811}
+    .browser-cover div:last-child{width:46%;margin-top:8px}
+    .work-copy{display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+    .work-copy p{font-size:clamp(17px,1.85vw,25px);line-height:1.36;letter-spacing:-.025em;margin:0;max-width:400px}
+    .work-copy small{display:block;border-top:1px solid var(--line);padding-top:16px;font-size:12px;line-height:1.7;color:#585d53}
+    /* TECHNICAL INVENTORY */
+    .inventory{background:#11120f;color:var(--paper);padding-bottom:clamp(100px,12vw,180px)}
+    .inventory-head{padding:clamp(88px,11vw,170px) var(--pad) 70px;display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:end}
+    .inventory-head h2{font-family:var(--display);font-weight:800;font-size:clamp(84px,13vw,215px);letter-spacing:-.06em;line-height:.7;margin:0;text-transform:uppercase}
+    .inventory-head h2 em{color:var(--yellow);font-family:var(--serif);font-weight:400;text-transform:none;font-size:.66em;letter-spacing:-.045em}
+    .inventory-head>p{font-size:14px;line-height:1.7;max-width:330px;justify-self:end;color:#b8bcb1}
+    .inventory-grid{margin:0 var(--pad);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid rgba(244,242,232,.24);border-left:1px solid rgba(244,242,232,.24)}
+    .inventory-col{min-width:0;min-height:330px;border-right:1px solid rgba(244,242,232,.24);border-bottom:1px solid rgba(244,242,232,.24);padding:30px clamp(24px,3vw,48px) 40px}
+    .inventory-col .tag{display:block;font-family:var(--mono);font-size:11px;color:var(--yellow);margin-bottom:65px}
+    .inventory-col h3{font-family:var(--display);font-size:clamp(36px,4vw,63px);font-weight:700;letter-spacing:-.04em;margin:0 0 23px;text-transform:uppercase;line-height:.93}
+    .inventory-col p{margin:0;font-size:13px;line-height:1.9;color:#b4b9b0}
+    .inventory-col .list-title{margin-top:12px}
+    .inventory-footer{margin:24px var(--pad) 0;display:flex;justify-content:space-between;gap:20px;font-family:var(--mono);font-size:10px;color:#9ea29a;text-transform:uppercase;line-height:1.7}
+    .inventory-footer span:first-child{color:var(--yellow)}
+    /* EDUCATION / CREDITS */
+    .education{background:#e9ff54;color:#11120f;padding-bottom:clamp(80px,9vw,130px)}
+    .education-main{padding:clamp(85px,11vw,156px) var(--pad) 65px;display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:end}
+    .education-main h2{font-family:var(--display);font-weight:800;line-height:.8;letter-spacing:-.06em;text-transform:uppercase;font-size:clamp(88px,12vw,190px);margin:0}
+    .education-main h2 i{font-family:var(--serif);font-weight:400;text-transform:none;font-size:.8em}
+    .education-main p{margin:0 0 7px;max-width:430px;font-size:clamp(19px,2vw,27px);line-height:1.35;letter-spacing:-.025em;justify-self:end}
+    .edu-rule{margin:0 var(--pad);border-top:1px solid rgba(17,18,15,.55);display:grid;grid-template-columns:140px 1fr 1fr;gap:22px;padding:26px 0 28px;align-items:start}
+    .edu-rule:last-child{border-bottom:1px solid rgba(17,18,15,.55)}
+    .edu-rule .edu-type{font-family:var(--mono);font-size:11px}
+    .edu-rule strong{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(33px,3.6vw,54px);line-height:1;letter-spacing:-.028em}
+    .edu-rule p{margin:0;font-size:13px;line-height:1.75;max-width:330px;justify-self:end}
+    /* OUTRO */
+    .outro{background:#11120f;color:var(--paper);padding-bottom:24px;overflow:hidden}
+    .outro-top{padding:27px var(--pad) 0;display:flex;justify-content:space-between;gap:16px}
+    .outro-header{padding:clamp(100px,12vw,195px) var(--pad) 35px}
+    .outro-header .kicker{font-family:var(--mono);font-size:11px;color:var(--yellow);margin:0 0 28px}
+    .outro-header h2{font-family:var(--display);text-transform:uppercase;font-size:clamp(110px,18.5vw,330px);line-height:.72;letter-spacing:-.065em;font-weight:900;margin:0}
+    .outro-header h2 em{font-family:var(--serif);color:var(--yellow);font-weight:400;font-size:.53em;text-transform:none;letter-spacing:-.04em;line-height:1.2}
+    .outro-info{padding:0 var(--pad) clamp(110px,13vw,190px);display:flex;justify-content:space-between;align-items:end;gap:40px}
+    .outro-info p{font-size:clamp(21px,2.5vw,34px);line-height:1.36;letter-spacing:-.025em;max-width:650px;margin:0;font-family:var(--serif);font-style:italic;color:#eeeede}
+    .back-top{padding:16px 20px;display:inline-flex;gap:34px;align-items:center;border:1px solid rgba(244,242,232,.6);font-family:var(--mono);font-size:11px;text-transform:uppercase;transition:background .25s,color .25s;white-space:nowrap}
+    .back-top:hover{background:var(--yellow);color:var(--ink)}
+    .footer{margin:0 var(--pad);border-top:1px solid rgba(244,242,232,.25);padding:24px 0 3px;display:flex;justify-content:space-between;gap:20px;align-items:center;font-family:var(--mono);font-size:10px;text-transform:uppercase;color:#9ea29a}
+    .footer b{color:var(--paper);font-weight:500}
+    [data-reveal]{opacity:1;transform:none}
+    .js [data-reveal]{opacity:0;transform:translateY(25px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+    .js [data-reveal].revealed{opacity:1;transform:none}
+    @media(max-width:1100px){
+      .hero{min-height:790px}.hero-art{width:75%;top:8%;right:-18%}.name-stack{--name-size:19vw}.hero-statement{font-size:clamp(39px,5.4vw,72px)}
+      .archive-title{display:block}.archive-title>p{margin-top:35px}
+      .interest-row{grid-template-columns:53px minmax(0,1fr) minmax(200px,.6fr) 25px;gap:12px}
+    }
+    @media(max-width:760px){
+      :root{--pad:21px}
+      html{scroll-padding-top:68px}
+      .masthead{height:68px;grid-template-columns:1fr auto;gap:10px}
+      .brand{font-size:32px}
+      .header-right{display:none}
+      .menu-toggle{display:flex;justify-self:end;grid-column:2}
+      .nav-links{display:none;position:absolute;top:68px;left:0;right:0;background:#11120f;padding:19px var(--pad) 27px;border-bottom:1px solid #4b4e42;flex-direction:column;align-items:stretch;gap:0;z-index:20}
+      .nav-links.is-open{display:flex}.nav-links a{font-size:13px;padding:15px 0;border-bottom:1px solid rgba(244,242,232,.15)}
+      .hero{min-height:780px;min-height:calc(100svh - 68px);max-height:none}
+      .hero-top{padding-top:21px}.hero-top span:last-child{display:none}
+      .hero-body{padding:clamp(105px,17vh,170px) var(--pad) 36px;justify-content:space-between}
+      .name-stack{--name-size:23.4vw;margin-left:13px;padding:30px 25px 45px 0}
+      .name-echo{top:30px}.name-echo-outline{transform:translate(-11px,-15px);-webkit-text-stroke:1px rgba(233,255,84,.8)}.name-echo-under{transform:translate(13px,13px)}
+      .name-stack::after{font-size:8px;right:-2px;bottom:10px}
+      .hero-title sup{top:-6%;font-size:14px;margin-left:5px}
+      .hero-art{right:-52%;top:14%;width:130%;opacity:.64}
+      .hero-lower{display:block}.hero-statement{font-size:clamp(40px,10vw,70px);max-width:490px}
+      .hero-desc{font-size:12px;max-width:320px;margin:24px 0 0;line-height:1.65}
+      .hero-footer{grid-template-columns:1fr auto;font-size:9px;gap:8px}.hero-footer .scroll{justify-content:flex-end}.hero-footer>span:last-child{display:none}.scroll-line{width:25px}
+      .ticker{height:65px}.ticker-track span{font-size:42px;gap:17px}
+      .section-head{padding-top:23px}.section-head span:last-child{font-size:9px}
+      .about{padding-bottom:90px}.about-layout{grid-template-columns:1fr;padding-top:90px;gap:45px}
+      .about-display{font-size:clamp(85px,16.8vw,140px)}.about-aside{max-width:600px}.about-aside .lead{font-size:25px}
+      .definition{margin-top:75px}.definition p{font-size:9px}
+      .interests{padding-bottom:80px}.interests-intro{grid-template-columns:1fr;padding:80px var(--pad) 45px;gap:33px}.interests-intro h2{font-size:clamp(84px,14.4vw,126px)}.interests-intro p{justify-self:start;max-width:440px}
+      .interest-row{grid-template-columns:35px 1fr 25px;gap:10px;min-height:140px}.interest-name{font-size:clamp(46px,9vw,70px)}.interest-row p{grid-column:2;grid-row:2;max-width:520px}.interest-arrow{grid-column:3;grid-row:1}.interest-row{padding:25px 0}.interest-row:hover{padding-left:0;padding-right:0;background:none}
+      .archive{padding-bottom:90px}.archive-title{padding-top:85px;padding-bottom:50px}.archive-title h2{font-size:clamp(95px,17vw,150px)}.archive-title .serif{font-size:.63em}
+      .work summary{grid-template-columns:32px minmax(0,1fr) 30px;gap:10px}.work-meta{grid-column:2;grid-row:2}.plus{grid-column:3;grid-row:1}.work-title{font-size:clamp(45px,9vw,71px)}
+      .work-content{padding:7px 0 34px;grid-template-columns:1fr;gap:25px}.work-visual{min-height:260px}.work-copy p{font-size:20px}
+      .inventory{padding-bottom:85px}.inventory-head{padding-top:90px;grid-template-columns:1fr;gap:25px}.inventory-head h2{font-size:clamp(92px,16vw,155px)}.inventory-head>p{justify-self:start}
+      .inventory-grid{grid-template-columns:minmax(0,1fr)}.inventory-col{min-height:auto;padding:25px 26px 35px}.inventory-col .tag{margin-bottom:38px}.inventory-col h3{font-size:clamp(34px,10vw,48px);overflow-wrap:anywhere}.inventory-col p{font-size:13px}.inventory-footer{flex-direction:column}
+      .education{padding-bottom:85px}.education-main{grid-template-columns:1fr;gap:35px;padding:90px var(--pad) 60px}.education-main h2{font-size:clamp(100px,16vw,155px)}.education-main p{justify-self:start;font-size:23px}
+      .edu-rule{grid-template-columns:1fr;gap:12px}.edu-rule strong{font-size:43px}.edu-rule p{justify-self:start}
+      .outro-header{padding-top:100px}.outro-header h2{font-size:17vw}.outro-info{display:block;padding-bottom:120px}.outro-info p{font-size:clamp(24px,6.6vw,33px);margin-bottom:37px}.footer{flex-direction:column;align-items:flex-start}
+    }
+    @media(max-width:400px){
+      .hero{min-height:700px}.hero-art{top:20%;right:-67%;width:150%}.name-stack{--name-size:23vw}.hero-statement{font-size:38px}.hero-top{font-size:9px}.hero-footer{font-size:8px}
+      .about-display{font-size:18vw}.interests-intro h2{font-size:19vw}.archive-title h2{font-size:19vw}.inventory-head h2{font-size:20vw}.education-main h2{font-size:20vw}.outro-header h2{font-size:17vw}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ticker-track,.hero-art .orbit,.hero-art .orbit2{animation:none!important}.js [data-reveal]{opacity:1!important;transform:none!important;transition:none!important}*{transition-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+  <header class="masthead">
+    <a class="brand" href="#inicio" aria-label="Jahir, volver al inicio">JAHIR<span>®</span></a>
+    <nav class="nav-links" id="main-nav" aria-label="Navegación principal">
+      <a href="#perfil">01 / Perfil</a><a href="#intereses">02 / Enfoque</a><a href="#archivo">03 / Archivo</a><a href="#herramientas">04 / Recursos</a><a href="#formacion">05 / Formación</a>
+    </nav>
+    <div class="header-right"><span class="pulse" aria-hidden="true"></span><span>PORTAFOLIO / 2026</span></div>
+    <button class="menu-toggle" aria-label="Abrir menú" aria-controls="main-nav" aria-expanded="false" type="button"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button>
+  </header>
+  <main id="contenido">
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero-top eyebrow"><span>PERFIL / CIENCIAS Y TECNOLOGÍA</span><span>CIENCIA — TECNOLOGÍA — HUMANIDADES</span></div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 1000 1000" role="presentation" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="sphere" cx="31%" cy="21%" r="79%"><stop offset="0" stop-color="#f7ff9b"/><stop offset=".27" stop-color="#e9ff54"/><stop offset=".6" stop-color="#73822f"/><stop offset=".8" stop-color="#2d3420"/><stop offset="1" stop-color="#0d0e0b"/></radialGradient>
+            <linearGradient id="ring" x1="0" x2="1" y1="1" y2="0"><stop stop-color="#505a31"/><stop offset=".55" stop-color="#e9ff54"/><stop offset="1" stop-color="#fffccc"/></linearGradient>
+            <clipPath id="c"><circle cx="500" cy="490" r="288"/></clipPath>
+            <pattern id="lines" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(-21)"><path d="M0 0V22" stroke="#f3ffcd" stroke-width="1.4" opacity=".46"/></pattern>
+            <filter id="glow"><feGaussianBlur stdDeviation="19"/></filter>
+          </defs>
+          <circle cx="500" cy="490" r="288" fill="#b9ff38" opacity=".23" filter="url(#glow)"/>
+          <g class="orbit"><ellipse cx="500" cy="490" rx="414" ry="173" transform="rotate(-33 500 490)" fill="none" stroke="#f3ffb8" stroke-width="2.3" opacity=".7"/><ellipse cx="500" cy="490" rx="439" ry="198" transform="rotate(48 500 490)" fill="none" stroke="#8c9851" stroke-width="1.5" stroke-dasharray="4 12"/></g>
+          <g class="orbit2"><circle cx="500" cy="490" r="354" fill="none" stroke="#e9ff54" stroke-width="1.1" stroke-dasharray="4 19"/><circle cx="500" cy="490" r="405" fill="none" stroke="#a0b03b" stroke-width="1" opacity=".54"/><circle cx="855" cy="490" r="8" fill="#e9ff54"/><circle cx="145" cy="490" r="5" fill="#e9ff54"/></g>
+          <circle cx="500" cy="490" r="288" fill="url(#sphere)"/>
+          <g clip-path="url(#c)"><circle cx="500" cy="490" r="288" fill="url(#lines)" opacity=".66"/>
+            <g fill="none" stroke="#f7ffc9" stroke-width="1.2" opacity=".62">
+              <ellipse cx="500" cy="490" rx="85" ry="300"/><ellipse cx="500" cy="490" rx="175" ry="300"/><ellipse cx="500" cy="490" rx="252" ry="300"/>
+              <ellipse cx="500" cy="490" rx="300" ry="72"/><ellipse cx="500" cy="490" rx="300" ry="156"/><ellipse cx="500" cy="490" rx="300" ry="241"/>
+            </g>
+            <path d="M217 565C326 424 465 390 781 391" fill="none" stroke="#14170f" opacity=".35" stroke-width="46"/>
+            <path d="M250 671C391 516 600 451 747 457" fill="none" stroke="#191d11" opacity=".22" stroke-width="26"/>
+            <circle cx="500" cy="490" r="288" fill="none" stroke="#f8ffd7" stroke-width="3" opacity=".28"/>
+          </g>
+          <ellipse cx="500" cy="490" rx="400" ry="135" transform="rotate(-33 500 490)" fill="none" stroke="url(#ring)" stroke-width="13"/>
+          <ellipse cx="500" cy="490" rx="400" ry="135" transform="rotate(-33 500 490)" fill="none" stroke="#10120f" stroke-width="4" opacity=".42" stroke-dasharray="12 17"/>
+          <path d="M173 742h137m-137 0v-55M765 236h110m0 0v55" stroke="#e9ff54" fill="none" stroke-width="2"/>
+          <circle cx="500" cy="490" r="296" fill="none" stroke="#f9ffe2" opacity=".22" stroke-width="1"/>
+          <g font-family="monospace" fill="#deff89" font-size="15" letter-spacing="2"><text x="100" y="680">N. 0087 / CURIOSITY</text><text x="645" y="185">FIG. 001 — SYSTEMS</text><text x="734" y="820">360° / ANALYSIS</text></g>
+        </svg>
+      </div>
+      <div class="hero-body">
+        <div class="name-stack">
+          <span class="name-echo name-echo-outline" aria-hidden="true">JAHIR</span>
+          <span class="name-echo name-echo-under" aria-hidden="true">JAHIR</span>
+          <h1 class="hero-title" id="hero-title">JAHIR<sup>®</sup></h1>
+        </div>
+        <div class="hero-lower">
+          <p class="hero-statement">CIENCIA & SISTEMAS.<br><i>Perspectiva humana.</i></p>
+          <p class="hero-desc">Estudiante de Bachiller en Ciencias, con interés en matemáticas, física, redes y ciberseguridad. Registro de formación, prácticas y exploraciones técnicas.</p>
+        </div>
+      </div>
+      <div class="hero-footer"><span>01—05 &nbsp; / &nbsp; UN ARCHIVO PERSONAL</span><a href="#perfil" class="scroll">DESLIZA PARA EXPLORAR <span class="scroll-line"></span><span aria-hidden="true">↓</span></a><span>CIENCIA / TECNOLOGÍA / SOCIEDAD</span></div>
+    </section>
+    <div class="ticker" aria-hidden="true"><div class="ticker-track">
+      <span>CIENCIA <b>×</b> MATEMÁTICAS <b>×</b> FÍSICA <b>×</b> REDES <b>×</b> SEGURIDAD <b>×</b> CURIOSIDAD <b>×</b></span>
+      <span>CIENCIA <b>×</b> MATEMÁTICAS <b>×</b> FÍSICA <b>×</b> REDES <b>×</b> SEGURIDAD <b>×</b> CURIOSIDAD <b>×</b></span>
+    </div></div>
+    <section class="about paper" id="perfil" aria-labelledby="perfil-title">
+      <div class="section-head"><span class="section-number">[ 01 / PERFIL ]</span><span class="eyebrow">FORMACIÓN Y PERSPECTIVA ↘</span></div>
+      <div class="about-layout">
+        <h2 class="about-display" id="perfil-title" data-reveal>CIENCIA,<br>SISTEMAS<br><em>y contexto.</em></h2>
+        <div class="about-aside" data-reveal><div class="tiny-rule"></div><p class="lead">El pensamiento científico permite comprender problemas desde sus fundamentos.</p><p>Soy Jahir, estudiante de Bachiller en Ciencias en la Academia Bilingüe Panamá para el Futuro. Me interesan especialmente las matemáticas y la física, pero también la manera en que funcionan los sistemas tecnológicos. Veo la ciberseguridad como una combinación de responsabilidad, comprensión del software y atención a los riesgos. Aspiro a desarrollarme en STEM sin perder de vista sus dimensiones humanas.</p></div>
+      </div>
+      <div class="definition"><p>DISCIPLINA &nbsp;/&nbsp; APRENDIZAJE &nbsp;/&nbsp; PENSAMIENTO CRÍTICO</p><p>CIENCIA / TECNOLOGÍA / HUMANIDADES</p></div>
+    </section>
+    <section class="interests" id="intereses" aria-labelledby="intereses-title">
+      <div class="section-head"><span class="section-number">[ 02 / ENFOQUE ]</span><span class="eyebrow">CAMPOS DE ESTUDIO Y EXPLORACIÓN</span></div>
+      <div class="interests-intro"><h2 id="intereses-title" data-reveal>ÁREAS DE<br><em>interés.</em></h2><p data-reveal>Áreas de aprendizaje que relacionan conceptos científicos, funcionamiento de sistemas y responsabilidad digital.</p></div>
+      <div class="interest-list">
+        <div class="interest-row"><span class="interest-index">/01</span><span class="interest-name">REDES & SISTEMAS</span><p>Arquitecturas, protocolos, comunicación entre dispositivos y funcionamiento de entornos virtuales.</p><span class="interest-arrow" aria-hidden="true">↗</span></div>
+        <div class="interest-row"><span class="interest-index">/02</span><span class="interest-name">SEGURIDAD DIGITAL</span><p>Hacking ético en entornos propios, análisis de riesgos y buenas prácticas de uso responsable.</p><span class="interest-arrow" aria-hidden="true">↗</span></div>
+        <div class="interest-row"><span class="interest-index">/03</span><span class="interest-name">CIENCIA & MÉTODO</span><p>Matemáticas, física y razonamiento analítico aplicados a problemas técnicos y humanos.</p><span class="interest-arrow" aria-hidden="true">↗</span></div>
+      </div>
+    </section>
+    <section class="archive" id="archivo" aria-labelledby="archivo-title">
+      <div class="section-head"><span class="section-number">[ 03 / ARCHIVO ]</span><span class="eyebrow">BITÁCORA DE EXPLORACIONES</span></div>
+      <div class="archive-title"><h2 id="archivo-title" data-reveal>EN<br><span class="serif">práctica.</span></h2><p>Registro de prácticas personales en entornos controlados y primeros ejercicios de desarrollo web.</p></div>
+      <details class="work" open><summary><span class="work-index">001</span><span class="work-title">LABORATORIOS VIRTUALES</span><span class="work-meta">SISTEMAS / PRÁCTICA PERSONAL</span><span class="plus" aria-hidden="true">+</span></summary>
+        <div class="work-content"><div class="work-visual visual-vm"><div class="terminal-art"><div class="terminal-top"><i></i><i></i><i></i></div><div class="terminal-lines"><span style="position:static;font:inherit;color:inherit"><b>&gt;</b> laboratorio / entorno local<br><b>—</b> máquinas virtuales<br><b>—</b> Linux + Windows<br><b>—</b> observación y pruebas<br><b>✓</b> notas de aprendizaje</span></div></div><span class="visual-label">FIG 01 / ENTORNO CONTROLADO</span></div><div class="work-copy"><p>Creación y exploración de máquinas virtuales para familiarizarme con sistemas operativos, configuraciones y vulnerabilidades en laboratorios propios.</p><small>Herramientas y entornos: Kali Linux, Windows y distintas distribuciones Linux. Experiencia exploratoria, realizada de manera personal.</small></div></div>
+      </details>
+      <details class="work"><summary><span class="work-index">002</span><span class="work-title">REDES Y OBSERVACIÓN</span><span class="work-meta">CONECTIVIDAD / FUNDAMENTOS</span><span class="plus" aria-hidden="true">+</span></summary>
+        <div class="work-content"><div class="work-visual visual-net"><svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="none" stroke="#161812" stroke-width="1.5" opacity=".9"><path d="M35 60L170 91L261 29L392 78L546 37M170 91L127 230L280 204L392 78L521 218L280 204M35 60L127 230M261 29L280 204M392 78L521 218M127 230L521 218"/></g><g fill="#161812"><circle cx="35" cy="60" r="7"/><circle cx="170" cy="91" r="7"/><circle cx="261" cy="29" r="7"/><circle cx="392" cy="78" r="7"/><circle cx="546" cy="37" r="7"/><circle cx="127" cy="230" r="7"/><circle cx="280" cy="204" r="15"/><circle cx="521" cy="218" r="7"/></g><g fill="none" stroke="#161812"><circle cx="280" cy="204" r="32"/><circle cx="280" cy="204" r="49" stroke-dasharray="2 5"/><circle cx="392" cy="78" r="19"/></g></svg><span class="visual-label">FIG 02 / NODOS Y CONEXIONES</span></div><div class="work-copy"><p>Primer acercamiento a la identificación de dispositivos, direcciones MAC, protocolos, puertos y conceptos de seguridad en redes.</p><small>También he explorado fundamentos de infraestructura física, fibra óptica, proxies y firewalls. Conocimientos introductorios en desarrollo.</small></div></div>
+      </details>
+      <details class="work"><summary><span class="work-index">003</span><span class="work-title">PRIMERAS PÁGINAS WEB</span><span class="work-meta">WEB / APRENDIZAJE</span><span class="plus" aria-hidden="true">+</span></summary>
+        <div class="work-content"><div class="work-visual visual-web"><div class="browser-art"><div class="browser-top"><i></i><i></i><i></i></div><div class="browser-cover"><strong>IDEAS<br>EN WEB.</strong><div></div><div></div></div></div><span class="visual-label">FIG 03 / DISEÑO Y CÓDIGO</span></div><div class="work-copy"><p>Experimentos personales de desarrollo web, con un enfoque inicial en estructura, presentación visual y comprensión de cómo se construyen las páginas.</p><small>Conocimientos básicos de CSS y Python. Este mismo portafolio forma parte del proceso de aprendizaje.</small></div></div>
+      </details>
+    </section>
+    <section class="inventory" id="herramientas" aria-labelledby="herramientas-title">
+      <div class="section-head"><span class="section-number">[ 04 / RECURSOS ]</span><span class="eyebrow">CONOCIMIENTOS / NIVEL INTRODUCTORIO</span></div>
+      <div class="inventory-head"><h2 id="herramientas-title" data-reveal>CAJA DE<br><em>herramientas.</em></h2><p>Sistemas, herramientas y conceptos que he utilizado o estudiado durante mi aprendizaje.</p></div>
+      <div class="inventory-grid">
+        <div class="inventory-col"><span class="tag">01 / OPERATIVOS</span><h3>SISTEMAS &<br>ENTORNOS</h3><p>Windows 7, 8, 10 y 11<br>Linux: Kali, Ubuntu, Arch y Parrot<br>Máquinas virtuales<br>Configuraciones básicas de firewall</p></div>
+        <div class="inventory-col"><span class="tag">02 / OBSERVACIÓN</span><h3>HERRAMIENTAS<br>DE SEGURIDAD</h3><p>Nmap<br>Wireshark<br>Burp Suite<br>SQLmap<br>BlackForce (exploración personal)</p></div>
+        <div class="inventory-col"><span class="tag">03 / BASES TÉCNICAS</span><h3>REDES &<br>PROGRAMACIÓN</h3><p>Python y CSS — nivel básico<br>Protocolos, puertos y direcciones MAC<br>Proxies y fundamentos de conectividad<br>Componentes físicos de redes</p></div>
+      </div>
+      <div class="inventory-footer"><span>SISTEMAS / REDES / PROGRAMACIÓN</span><span>Conocimientos iniciales y prácticas personales.</span></div>
+    </section>
+    <section class="education" id="formacion" aria-labelledby="formacion-title">
+      <div class="section-head"><span class="section-number">[ 05 / FORMACIÓN ]</span><span class="eyebrow">PRESENTE Y PRÓXIMOS PASOS</span></div>
+      <div class="education-main"><h2 id="formacion-title" data-reveal>SEGUIR<br><i>aprendiendo.</i></h2><p>Mi formación no se limita a dominar una herramienta. Me interesa comprender los fundamentos, experimentar y conectar el conocimiento técnico con su impacto humano.</p></div>
+      <div class="edu-rule"><span class="edu-type">01 / ACTUAL</span><strong>BACHILLER EN CIENCIAS</strong><p>Academia Bilingüe Panamá para el Futuro. Énfasis personal en matemáticas y física.</p></div>
+      <div class="edu-rule"><span class="edu-type">02 / PROPÓSITO</span><strong>DESARROLLO EN STEM</strong><p>Seguir formándome en ciencia y tecnología, manteniendo presentes las aplicaciones humanísticas.</p></div>
+      <div class="edu-rule"><span class="edu-type">03 / ESTADO</span><strong>FORMACIÓN EN CURSO</strong><p>Sin certificaciones especializadas hasta el momento. Aprendizaje mediante estudio y práctica independiente.</p></div>
+    </section>
+    <section class="outro" id="contacto" aria-labelledby="contacto-title">
+      <div class="outro-top"><span class="section-number">[ EPÍLOGO / 06 ]</span><span class="eyebrow">CONOCIMIENTO Y RESPONSABILIDAD</span></div>
+      <div class="outro-header"><p class="kicker">UNA REFLEXIÓN FINAL / CIENCIA Y SOCIEDAD</p><h2 id="contacto-title" data-reveal>CONOCER.<br><em>Compartir.</em></h2></div>
+      <div class="outro-info"><p>«Lo que sabemos adquiere sentido cuando nos ayuda a comprender mejor el mundo y a mejorar, aunque sea un poco, la vida de otros».</p><a class="back-top" href="#inicio">VOLVER AL INICIO <span aria-hidden="true">↗</span></a></div>
+      <footer class="footer"><span><b>JAHIR®</b> / ARCHIVO PERSONAL</span><span>CIENCIA · SISTEMAS · CURIOSIDAD</span><span>© <span id="year">2026</span> — PORTAFOLIO PERSONAL</span></footer>
+    </section>
+  </main>
+  <script>
+    document.documentElement.classList.add('js');
+    const menuButton=document.querySelector('.menu-toggle');
+    const nav=document.querySelector('.nav-links');
+    menuButton.addEventListener('click',()=>{
+      const opened=nav.classList.toggle('is-open');
+      menuButton.setAttribute('aria-expanded',String(opened));
+      menuButton.setAttribute('aria-label',opened?'Cerrar menú':'Abrir menú');
+    });
+    nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{
+      nav.classList.remove('is-open');menuButton.setAttribute('aria-expanded','false');menuButton.setAttribute('aria-label','Abrir menú');
+    }));
+    document.getElementById('year').textContent=new Date().getFullYear();
+    const targets=document.querySelectorAll('[data-reveal]');
+    if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+      const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('revealed');observer.unobserve(entry.target)}})},{threshold:.12,rootMargin:'0px 0px -15px 0px'});
+      targets.forEach(el=>observer.observe(el));
+    }else{targets.forEach(el=>el.classList.add('revealed'))}
+  </script>
+</body>
+</html>
